@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_tracking_system/costomWidget/fullButton.dart';
+import 'package:file_tracking_system/costomWidget/internetConntivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -214,7 +215,9 @@ class TotalFile extends StatelessWidget {
                                         ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                                 backgroundColor: PrimaryColor),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              InternetConntivity();
+                                            },
                                             child: Text(
                                               "Trak File",
                                               style: TextStyle(

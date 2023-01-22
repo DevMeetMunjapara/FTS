@@ -27,7 +27,6 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(primaryColor: Color.fromARGB(255, 84, 22, 208)),
       routes: {
         "/": (context) => TotalFile(),
-        "/": (context) => const NumberVerfication(),
       },
     );
   }
