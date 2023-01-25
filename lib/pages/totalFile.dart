@@ -1,44 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_tracking_system/costomWidget/fileStatusIcon.dart';
 import 'package:file_tracking_system/costomWidget/fullButton.dart';
 import 'package:file_tracking_system/costomWidget/internetConntivity.dart';
+import 'package:file_tracking_system/pages/fileStatus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class TotalFile extends StatelessWidget {
-  TotalFile({super.key});
+  TotalFile({
+    super.key,
+  });
+
   final db = FirebaseFirestore.instance
       .collection("allUser")
       .doc("9409497905")
       .collection("allFile")
       .snapshots();
 
-  Widget iconFun(String status) {
-    if (status == "reject") {
-      return Icon(
-        Icons.cancel,
-        color: Colors.red,
-      );
-    } else if (status == "pandding") {
-      return Icon(
-        Icons.work_history,
-        color: Color.fromARGB(255, 234, 187, 17),
-      );
-    } else if (status == "approve") {
-      return Icon(
-        Icons.verified,
-        color: Color.fromARGB(255, 15, 161, 20),
-      );
-    }
-    return Icon(Icons.abc);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text("All Files"),
-          centerTitle: true,
           backgroundColor: PrimaryColor,
         ),
         body: Padding(
@@ -161,9 +145,9 @@ class TotalFile extends StatelessWidget {
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            iconFun(snapshot
-                                                .data!.docs[index]["status"]
-                                                .toString()),
+                                            FileStatusIcon(
+                                                fileStatus: snapshot.data!
+                                                    .docs[index]["fileStatus"])
                                           ],
                                         ),
                                         SizedBox(
@@ -216,7 +200,18 @@ class TotalFile extends StatelessWidget {
                                             style: ElevatedButton.styleFrom(
                                                 backgroundColor: PrimaryColor),
                                             onPressed: () {
-                                              InternetConntivity();
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          FileStatus(
+                                                            trckingId: snapshot
+                                                                .data!
+                                                                .docs[index]
+                                                                .reference
+                                                                .id
+                                                                .toString(),
+                                                          )));
                                             },
                                             child: Text(
                                               "Trak File",

@@ -8,7 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class InternetConntivity extends StatefulWidget {
-  const InternetConntivity({super.key});
+  const InternetConntivity({super.key, required TrakingId});
 
   @override
   State<InternetConntivity> createState() => _InternetConntivityState();
